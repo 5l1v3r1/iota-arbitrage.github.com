@@ -1,0 +1,43 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+body {
+  background-color: whitesmoke; }
+
+#no-websockets-modal span.icon i.fa.fa-exclamation-circle::before, #websockets-too-many-failures-modal span.icon i.fa.fa-exclamation-circle::before {
+  color: #ff3860; }
+
+.card .card-footer .card-footer-item.is-success {
+  background-color: #23d160; }
+
+.card .card-footer .card-footer-item.is-danger {
+  background-color: #ff3860; }
+
+.card .card-header.is-success {
+  background-color: #23d160; }
+
+.card .card-header.is-danger {
+  background-color: #ff3860; }
+
+.card.has-text-centered .card-header,
+.card.has-text-centered .card-content,
+.card.has-text-centered .card-footer {
+  justify-content: center;
+  align-items: center; }
+
+.card.has-text-centered .card-header {
+  padding: 0.25rem 0; }
+
+.card.trade-card {
+  margin-bottom: 0.2rem; }
+  .card.trade-card .card-footer p.trade-status {
+    text-align: left; }
+
+.hero.footer {
+  background-color: #363636;
+  color: whitesmoke; }
+
+/*# sourceMappingURL=app.css.map */

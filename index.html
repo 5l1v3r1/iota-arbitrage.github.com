@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>IOTA Buy Strategy</title>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+
+<!-- dev
+		<link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/bulma-0.5.1/css/bulma.min.css">
+-->
+
+		<script type="text/javascript" src="js/bulma-main.js"></script>
+		<script type="text/javascript" src="js/bitfinex.api.ws2.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<link rel="stylesheet" href="css/app.css">
+
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar ">
+				<div class="navbar-brand">
+					<div class="navbar-item">
+						<img src="assets/iota_logo.png" alt="IOTA logo" height="28">
+						&nbsp;
+						<span class="title">IOTA Buy Strategy</span>
+					</div>
+					<a class="navbar-item is-hidden-desktop" href="https://github.com/iota-buy-strategy/iota-buy-strategy.github.io" target="_blank">
+						<span class="icon" style="color: #333;"><i class="fa fa-github"></i></span>
+					</a>
+					<a class="navbar-item is-hidden-desktop" href="https://twitter.com" target="_blank">
+						<span class="icon" style="color: #55acee;"><i class="fa fa-twitter"></i></span>
+					</a>
+				</div> <!-- navbar-brand -->
+
+				<div class="navbar-end">
+					<span class="navbar-item">
+						<div class="field">
+							<div class="control has-icons-left">
+								<input id="navbar-amount-input" class="input is-success" type="number" value="1000" min="1">
+								<span class="icon is-small is-left">$</span>
+							</div>
+						</div>
+					</span>
+
+					<span class="navbar-item">
+						<a id="navbar-loader-button" class="button is-danger is-loading">
+							<span class="icon is-small"><i id="navbar-loader-button-icon" class="fa fa-cog fa-fw"></i></span>
+							<span id="navbar-loader-button-text">LIVE</span>
+						</a>
+					</span>
+
+					<a class="navbar-item is-hidden-touch" href="https://github.com/iota-buy-strategy/iota-buy-strategy.github.io" target="_blank">
+						<span class="icon" style="color: #333;"><i class="fa fa-github"></i></span>
+					</a>
+					<a class="navbar-item is-hidden-touch" href="https://twitter.com" target="_blank">
+						<span class="icon" style="color: #55acee;"><i class="fa fa-twitter"></i></span>
+					</a>
+				</div>
+
+			</nav> <!-- nav -->
+		</div> <!-- container -->
+
+		<div class="container">
+			<section id="section-cards" class="section">
+
+				<div id="stat-row-1" class="columns"> <!-- stat-row-1 .. usd-to-miota -->
+					<div class="column">
+						<div id="usd-to-miota" class="card has-text-centered" disabled>
+							<header class="card-header card-stat-item">
+								<h4 class="subtitle is-4">
+									$&nbsp;<span class="card-stat-amount">1000</span>
+									<span class="icon is-medium"><i class="fa fa-arrow-right"></i></span>
+									MIOTA
+								</h4>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-6">MIOTA</span>
+									<span class="card-stat-value title is-4">NA</span>
+								</div>
+							</div>
+						</div> <!-- card -->
+					</div>
+				</div> <!-- stat-row-1 .. usd-to-miota -->
+
+				<div id="stat-row-2" class="columns"> <!-- stat-row-2 .. usd-to-btc-to-miota -->
+					<div class="column">
+						<div id="usd-to-btc-to-miota" class="card has-text-centered" disabled>
+							<header class="card-header card-stat-item">
+								<h4 class="subtitle is-4">
+									$&nbsp;<span class="card-stat-amount">1000</span>
+									<span class="icon is-medium"><i class="fa fa-arrow-right"></i></span>
+									BTC
+									<span class="icon is-medium"><i class="fa fa-arrow-right"></i></span>
+									MIOTA
+								</h4>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-6">MIOTA</span>
+									<span class="card-stat-value title is-4">NA</span>
+								</div>
+							</div>
+						</div> <!-- card -->
+					</div>
+				</div> <!-- stat-row-2 .. usd-to-btc-to-miota -->
+
+
+				<div id="stat-row-3" class="columns"> <!-- stat-row-3 .. usd-to-eth-to-miota -->
+					<div class="column">
+						<div id="usd-to-eth-to-miota" class="card has-text-centered" disabled>
+							<header class="card-header card-stat-item">
+								<h4 class="subtitle is-4">
+									$&nbsp;<span class="card-stat-amount">1000</span>
+									<span class="icon is-medium"><i class="fa fa-arrow-right"></i></span>
+									ETH
+									<span class="icon is-medium"><i class="fa fa-arrow-right"></i></span>
+									MIOTA
+								</h4>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-6">MIOTA</span>
+									<span class="card-stat-value title is-4">NA</span>
+								</div>
+							</div>
+						</div> <!-- card -->
+					</div>
+				</div> <!-- stat-row-2 .. usd-to-eth-to-miota -->
+
+				<div id="prices-row-1" class="columns">
+					<div class="column"> <!-- column .. usdpermiota -->
+						<div id="usd-per-miota" class="card">
+							<header class="card-header">
+								<p class="card-header-title">USD/MIOTA</p>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-4">$</span>
+									<span class="card-exchange-rate title is-4">NA</span>
+								</div>
+							</div>
+							<footer class="card-footer">
+								<div class="card-footer-item card-exchange-percentage-item">
+									<span class="icon is-pulled-left"><i class="card-exchange-percentage-icon fa fa-chevron-right"></i></span>
+									<span class="card-exchange-percentage-change is-size-5">NA</span>
+									<span class="subtitle is-5">&nbsp;%</span>
+								</div>
+							</footer>
+						</div> <!-- card -->
+					</div> <!-- column .. usdpermiota -->
+
+
+					<div class="column"> <!-- column .. usdperbtc -->
+						<div id="usd-per-btc" class="card">
+							<header class="card-header">
+								<p class="card-header-title">USD/BTC</p>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-4">$</span>
+									<span class="card-exchange-rate title is-4">NA</span>
+								</div>
+							</div>
+							<footer class="card-footer">
+								<div class="card-footer-item card-exchange-percentage-item">
+									<span class="icon is-pulled-left"><i class="card-exchange-percentage-icon fa fa-chevron-right"></i></span>
+									<span class="card-exchange-percentage-change is-size-5">NA</span>
+									<span class="subtitle is-5">&nbsp;%</span>
+								</div>
+							</footer>
+						</div> <!-- card -->
+					</div> <!-- column .. usdperbtc -->
+
+					<div class="column"> <!-- column .. usdpereth -->
+						<div id="usd-per-eth" class="card">
+							<header class="card-header">
+								<p class="card-header-title">USD/ETH</p>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-4">$</span>
+									<span class="card-exchange-rate title is-4">NA</span>
+								</div>
+							</div>
+							<footer class="card-footer">
+								<div class="card-footer-item card-exchange-percentage-item">
+									<span class="icon is-pulled-left"><i class="card-exchange-percentage-icon fa fa-chevron-right"></i></span>
+									<span class="card-exchange-percentage-change is-size-5">NA</span>
+									<span class="subtitle is-5">&nbsp;%</span>
+								</div>
+							</footer>
+						</div> <!-- card -->
+					</div> <!-- column .. usdpereth -->
+				</div> <!-- prices .. row-1 -->
+
+				<div id="prices-row-2" class="columns">
+					<div class="column"> <!-- column .. btcpermiota -->
+						<div id="btc-per-miota" class="card">
+							<header class="card-header">
+								<p class="card-header-title">BTC/MIOTA</p>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-4">$</span>
+									<span class="card-exchange-rate title is-4">NA</span>
+								</div>
+							</div>
+							<footer class="card-footer">
+								<div class="card-footer-item card-exchange-percentage-item">
+									<span class="icon is-pulled-left"><i class="card-exchange-percentage-icon fa fa-chevron-right"></i></span>
+									<span class="card-exchange-percentage-change is-size-5">NA</span>
+									<span class="subtitle is-5">&nbsp;%</span>
+								</div>
+							</footer>
+						</div> <!-- card -->
+					</div> <!-- column .. btcpermiota -->
+
+					<div class="column"> <!-- column .. ethpermiota -->
+						<div id="eth-per-miota" class="card">
+							<header class="card-header">
+								<p class="card-header-title">ETH/MIOTA</p>
+							</header>
+							<div class="card-content">
+								<div class="content">
+									<span class="subtitle is-4">$</span>
+									<span class="card-exchange-rate title is-4">NA</span>
+								</div>
+							</div>
+							<footer class="card-footer">
+								<div class="card-footer-item card-exchange-percentage-item">
+									<span class="icon is-pulled-left"><i class="card-exchange-percentage-icon fa fa-chevron-right"></i></span>
+									<span class="card-exchange-percentage-change is-size-5">NA</span>
+									<span class="subtitle is-5">&nbsp;%</span>
+								</div>
+							</footer>
+						</div> <!-- card -->
+					</div> <!-- column .. ethpermiota -->
+				</div> <!-- prices .. row-2 -->
+
+			</section> <!-- section .. cards -->
+
+
+			<section id="section-trades" class="section">
+				<h1 class="title">Trades</h1>
+
+				<div id="trades-row" class="columns">
+					<div class="column is-half has-text-centered">
+						<h2 class="subtitle">Buy MIOTA</h2>
+						<br>
+						<div id="trades-column-buy">
+
+
+						</div> <!-- trades-column-buy -->
+					</div> <!-- buy -->
+					<div class="column is-half has-text-centered">
+						<h2 class="subtitle">Sell MIOTA</h2>
+						<br>
+						<div id="trades-column-sell">
+
+						</div>
+					</div> <!-- sell -->
+				</div> <!-- trades .. row -->
+			</section> <!-- section .. trades -->
+
+		</div> <!-- container .. body -->
+
+		<section class="hero is-bold footer">
+			<div class="hero-body">
+				<div class="container">
+					<p>
+						<span class="level">
+							<span class="level-left">
+								<span class="level-item">Powered by&nbsp;</span>
+								<span class="level-item">
+									<a href="https://www.bitfinex.com/" target="_blank">
+										<img alt="BitFinex" src="/assets/bitfinex.svg" title="BitFinex" style="height: 30px;" >
+									</a>
+								</span>
+							</span> <!-- level-left -->
+						</span> <!-- level -->
+						<br>
+						&copy; iota-buy-strategy 2017.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<div id="no-websockets-modal" class="modal is-active">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<div class="box">
+					<article class="media">
+						<div class="media-left">
+							<figure class="image is-64x64 has-text-centered">
+								<span class="icon is-large"><i class="fa fa-3x fa-exclamation-circle"></i></span>
+							</figure>
+						</div>
+						<div class="media-content">
+							<div class="content">
+								<strong>Your browser does not support websockets!</strong>
+								<br>
+								Please switch to a more modern browser and/or update your web browser.
+								<br>
+								<br>
+							</div>
+
+							<nav class="level">
+								<div class="level-left">
+									<a class="level-item" href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">
+										<span class="icon is-large"><i class="fa fa-chrome"></i></span>
+									</a>
+									<a class="level-item" href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">
+										<span class="icon is-large"><i class="fa fa-firefox"></i></span>
+									</a>
+								</div>
+							</nav>
+
+							<div class="content">
+								<small>If you think this is a mistake, contact <a href="mailto:johndoe@mail.com">johndoe@mail.com</a>.</small>
+							</div>
+						</div> <!-- media-content -->
+					</article>
+				</div> <!-- box -->
+			</div> <!-- modal-content -->
+		</div> <!-- no-websockets-modal -->
+
+		<div id="websockets-too-many-failures-modal" class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<div class="box">
+					<article class="media">
+						<div class="media-left">
+							<figure class="image is-64x64 has-text-centered">
+								<span class="icon is-large"><i class="fa fa-3x fa-exclamation-circle"></i></span>
+							</figure>
+						</div>
+						<div class="media-content">
+							<div class="content">
+								<strong>Cannot connect to BitFinex API!</strong>
+								<br>
+								Please check for network connectivity, refresh this page, and/or try again later!
+								<br>
+								<br>
+								<small>If you think this is a mistake, contact <a href="mailto:johndoe@mail.com">johndoe@mail.com</a>.</small>
+							</div>
+						</div> <!-- media-content -->
+					</article>
+				</div> <!-- box -->
+			</div> <!-- modal-content -->
+		</div> <!-- websockets-too-many-failures-modal -->
+
+		<div id="sample-trade-card" class="card trade-card" style="display:none;" data-tradeid="" data-tradetimestamp="" data-amount="" data-price="">
+			<header class="card-header">
+				<p class="card-header-title">
+					<span class="card-trade-currency-from">FROM</span>
+					<span class="icon is-small"><i class="fa fa-arrow-right"></i></span>
+					<span class="card-trade-currency-to">TO</span>
+				</p>
+			</header>
+			<div class="card-content">
+				<div class="content">
+					<span class="subtitle is-6">MIOTA</span>
+					<span class="card-trade-amount-miota title is-4">NA</span>
+					<span class="subtitle is-4">/</span>
+					<span class="card-trade-price title is-5">NA</span>
+					<span class="card-trade-price-unit subtitle is-6">$</span>
+				</div>
+			</div>
+			<footer class="card-footer">
+				<p class="trade-status">
+					<span class="icon"><i class="fa fa-circle-o-notch fa-spin fa-fw card-trade-status-icon"></i></span>
+					<span class="subtitle is-6 card-trade-status-text">UNKNOWN</span>
+					<br>
+					<span class="icon"><i class="fa fa-clock-o fa-fw"></i></span>
+					<span class="subtitle is-6 card-trade-timestamp-text">0000-00-00 00:00</span>
+				</p>
+			</footer>
+		</div>
+
+	</body>
+</html>
