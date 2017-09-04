@@ -10,16 +10,16 @@ body {
 #no-websockets-modal span.icon i.fa.fa-exclamation-circle::before, #websockets-too-many-failures-modal span.icon i.fa.fa-exclamation-circle::before {
   color: #ff3860; }
 
-.card .card-footer .card-footer-item.is-success {
-  background-color: #23d160; }
+.card .card-footer .card-footer-item.is-success .icon .card-exchange-percentage-icon {
+  color: #23d160; }
 
-.card .card-footer .card-footer-item.is-danger {
-  background-color: #ff3860; }
+.card .card-footer .card-footer-item.is-danger .icon .card-exchange-percentage-icon {
+  color: #ff3860; }
 
 .card .card-header.is-success {
   background-color: #23d160; }
 
-.card .card-header.is-danger {
+.card .card-header.is-danger h4 {
   background-color: #ff3860; }
 
 .card.has-text-centered .card-header,
