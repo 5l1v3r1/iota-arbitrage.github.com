@@ -38,6 +38,15 @@ body {
 
 .hero.footer {
   background-color: #363636;
-  color: whitesmoke; }
+  color: whitesmoke;
+  padding: 3rem 1.5rem 4rem; }
+  .hero.footer a {
+    color: #fff; }
+  .hero.footer a:hover {
+    color: #b5b5b5; }
+  .hero.footer .subtitle {
+    color: #fff; }
+  .hero.footer .title {
+    color: #fff; }
 
 /*# sourceMappingURL=app.css.map */
