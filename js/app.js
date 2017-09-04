@@ -3,7 +3,7 @@ var __bfx = null;
 var __error_count = 0;
 const RETRY_WAIT_MS = 1000;
 const MAX_ERROR_COUNT = 5;
-const MAX_CARDS = 3;
+const MAX_CARDS = 8;
 
 const TRADE_MIOTA_RESOLUTION = 5;
 
