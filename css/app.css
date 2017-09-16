@@ -17,10 +17,10 @@ body {
   color: maroon; }
 
 .card .card-header.is-success {
-  background-color: #23d160; }
+  border: solid #23d160 3px; }
 
-.card .card-header.is-danger h4 {
-  background-color: #ff3860; }
+.card .card-header.is-danger {
+  border: solid #ff3860 2px; }
 
 .card.has-text-centered .card-header,
 .card.has-text-centered .card-content,
