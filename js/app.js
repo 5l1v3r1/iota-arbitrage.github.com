@@ -6,6 +6,7 @@ const MAX_ERROR_COUNT = 5;
 const MAX_CARDS = 8;
 
 const TRADE_MIOTA_RESOLUTION = 5;
+const TRADE_PRICE_RESOLUTION = 8;
 
 /* exchange vars */
 var usd_per_btc = null;
@@ -387,8 +388,13 @@ var addCard = function(pair, data, update = 2) {
 		/*
 			SET from to
 		*/
-		$e_from.innerHTML = $v_from_to[0];
-		$e_to.innerHTML = $v_from_to[1];
+		if (trade.amount < 0) {
+			$e_from.innerHTML = $v_from_to[1];
+			$e_to.innerHTML = $v_from_to[0];
+		} else {
+			$e_from.innerHTML = $v_from_to[0];
+			$e_to.innerHTML = $v_from_to[1];
+		}
 
 		/*
 			SET amount
@@ -402,7 +408,7 @@ var addCard = function(pair, data, update = 2) {
 		/*
 			SET price and unit
 		*/
-		$e_trade_price.innerHTML = trade.price;
+		$e_trade_price.innerHTML = trade.price.toFixed(TRADE_PRICE_RESOLUTION);
 		if (trade.amount < 0) {
 			$e_trade_price_unit.innerHTML = $v_from_to[1] + "/" + $v_from_to[0];
 		} else {
@@ -505,7 +511,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		$loaderButton.classList.add('is-danger');
 	}
 
-	$sampleTradeCard = document.getElementById('sample-trade-card');
+	$t = document.getElementById('sample-trade-card');
+	if ($t) {
+		$sampleTradeCard = $t.getElementsByTagName("tr")[0];
+	}
 
 	$userInputUSD = document.getElementById('navbar-amount-input');
 	if ($userInputUSD) {
