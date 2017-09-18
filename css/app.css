@@ -9,6 +9,8 @@ body {
   body .trade-card .column {
     padding-top: 0;
     padding-bottom: 0; }
+  body .tile.is-vertical > .tile.is-child:not(:last-child) {
+    margin-bottom: 0.5rem !important; }
 
 #no-websockets-modal span.icon i.fa.fa-exclamation-circle::before, #websockets-too-many-failures-modal span.icon i.fa.fa-exclamation-circle::before {
   color: #ff3860; }

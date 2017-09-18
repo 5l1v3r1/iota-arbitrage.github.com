@@ -5,7 +5,7 @@ const RETRY_WAIT_MS = 1000;
 const MAX_ERROR_COUNT = 5;
 const MAX_CARDS = 8;
 
-const TRADE_MIOTA_RESOLUTION = 5;
+const TRADE_MIOTA_RESOLUTION = 8;
 const TRADE_PRICE_RESOLUTION = 8;
 
 /* exchange vars */
