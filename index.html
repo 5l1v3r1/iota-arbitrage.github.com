@@ -7,6 +7,7 @@
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 
 <!-- dev
 		<link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -253,33 +254,54 @@
 			</div> <!-- hero-body -->
 		</section> <!-- hero -->
 
-		<section class="hero is-bold footer">
+		<section class="hero is-bold is-dark is-bold footer">
 			<div class="hero-body">
 				<div class="container">
-					<p>
-						<span class="level">
-							<span class="level-left">
-								<span class="level-item">Powered by&nbsp;</span>
-								<span class="level-item">
-									<a href="https://www.bitfinex.com/" target="_blank">
-										<img alt="BitFinex" src="/assets/bitfinex.svg" title="BitFinex" style="height: 30px;" >
-									</a>
-								</span>
-							</span> <!-- level-left -->
-						</span> <!-- level -->
+					<span class="level">
+						<span class="level-left">
+							<span class="level-item">Powered by&nbsp;</span>
+							<span class="level-item">
+								<a href="https://www.bitfinex.com/" target="_blank">
+									<img alt="BitFinex" src="/assets/bitfinex.svg" title="BitFinex" style="height: 30px;" >
+								</a>
+							</span>
+						</span> <!-- level-left -->
+					</span> <!-- level -->
+					<span>
 						Concept by <a href="https://github.com/pRizz/iota-buy-strategy" target="_blank">Peter Ryszkiewicz</a>.
-						<br>
-						<br>
-						Donate:
-						<br>
-						<span class="title is-6 is-white-ter">IOTA</span>&nbsp;<span class="subtitle is-6 is-white">UNPXZCFQRTFKIYQYHVJOGYSPXGMKZWLIMBMI9HHQANBZMJYRJYLIYFJKZKKZ9MKOPTYEUJTGGI9JPUSYZMPZNKKFXA</span>
-						<br>
-						<span class="title is-6 is-inverted">&nbsp;BTC</span>&nbsp;<span class="subtitle is-6 is-white"><a href="https://blockchain.info/payment_request?address=1tE9ZS7ohexjvhStcLxVpYxpbgUNu59Yh" target="_blank">1tE9ZS7ohexjvhStcLxVpYxpbgUNu59Yh</a></span>
-						<br>
-						<br>
-						<br>
-						&copy; iota-arbitrage 2017.
-					</p>
+					</span>
+					<br>
+					<br>
+					<span>Donate:</span>
+					<div class="field has-addons">
+						<p class="control">
+							<a class="button is-static is-static-primary"><strong>IOTA</strong></a>
+						</p>
+						<p class="control is-expanded">
+							<input id="donationIOTAaddr" class="input" type="text" value="UNPXZCFQRTFKIYQYHVJOGYSPXGMKZWLIMBMI9HHQANBZMJYRJYLIYFJKZKKZ9MKOPTYEUJTGGI9JPUSYZMPZNKKFXA" readonly>
+						</p>
+						<p class="control">
+							<a class="button is-info" id="donationIOTAbtn" data-clipboard-target="#donationIOTAaddr">
+								Copy
+							</a>
+						</p>
+					</div>
+					<div class="field has-addons">
+						<p class="control">
+							<a class="button is-static is-static-primary"><strong>BTC</strong></a>
+						</p>
+						<p class="control is-expanded">
+							<input id="donationBTCaddr" class="input" type="text" value="1tE9ZS7ohexjvhStcLxVpYxpbgUNu59Yh" readonly>
+						</p>
+						<p class="control">
+							<a class="button is-info" id="donationBTCbtn" data-clipboard-target="#donationBTCaddr">
+								Copy
+							</a>
+						</p>
+					</div>
+					<br>
+					<br>
+					<span>&copy; iota-arbitrage 2017.</span>
 				</div>
 			</div>
 		</section> <!-- footer -->
@@ -364,5 +386,7 @@
 				</td>
 			</tr>
 		</table>
+
+		<script type="text/javascript">new Clipboard('#donationIOTAbtn');new Clipboard('#donationBTCbtn');</script>
 	</body>
 </html>

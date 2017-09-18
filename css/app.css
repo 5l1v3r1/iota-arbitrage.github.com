@@ -52,17 +52,4 @@ body {
   .card.trade-card .card-footer p.trade-status {
     text-align: left; }
 
-.hero.footer {
-  background-color: #363636;
-  color: whitesmoke;
-  padding: 3rem 1.5rem 4rem; }
-  .hero.footer a {
-    color: #fff; }
-  .hero.footer a:hover {
-    color: #b5b5b5; }
-  .hero.footer .subtitle {
-    color: #fff; }
-  .hero.footer .title {
-    color: #fff; }
-
 /*# sourceMappingURL=app.css.map */
