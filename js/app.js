@@ -5,6 +5,9 @@ const RETRY_WAIT_MS = 1000;
 const MAX_ERROR_COUNT = 5;
 const MAX_CARDS = 8;
 
+const EXCHANGE_RATE_PRICE_RESOLUTION = 8;
+const EXCHANGE_RATE_PERCENT_RESOLUTION = 2;
+const ARBITRAGE_RESOLUTION = 8;
 const TRADE_MIOTA_RESOLUTION = 8;
 const TRADE_PRICE_RESOLUTION = 8;
 
@@ -116,7 +119,7 @@ var updateCard = function(pair, data, element) {
 				price = null;
 			}
 			if (price != null) {
-				e_price[0].innerHTML = price.toFixed(8);
+				e_price[0].innerHTML = price.toFixed(EXCHANGE_RATE_PRICE_RESOLUTION);
 			}
 
 			var change = null;
@@ -151,7 +154,7 @@ var updateCard = function(pair, data, element) {
 				if (change < 0) {
 					change = change * -1;
 				}
-				e_percent_change[0].innerHTML = change.toFixed(3);
+				e_percent_change[0].innerHTML = change.toFixed(EXCHANGE_RATE_PERCENT_RESOLUTION);
 			}
 
 		} else if (typeof data[0] == 'string' && data[0] == 'hb') { // heartbeat
@@ -166,7 +169,7 @@ var __updateStat = function(element, amount, max, price) {
 	const e_header = element.getElementsByClassName('card-stat-item');
 
 	e_amount[0].innerHTML = amount
-	e_value[0].innerHTML = price.toFixed(8);
+	e_value[0].innerHTML = price.toFixed(ARBITRAGE_RESOLUTION);
 
 	if (price == max) {
 		e_header[0].classList.add('is-success');
